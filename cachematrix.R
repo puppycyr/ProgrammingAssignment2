@@ -15,17 +15,17 @@
 # 3) set the inverse matrix; and 4) get the value of the matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
-    InverseMatrix <- NULL  # initialization
-    set <- function(y) { 
-        x <<- y  # assign new matrix as input
-        InverseMatrix <<- NULL  # initialize memeory
-    }
-    get <- function() x  ## get the new matrix
-    setInverse <- function(im) InverseMatrix <<- im  # put into memory
-    getInverse <- function() InverseMatrix  # read memory
-    list(set = set, get = get,
-         setInverse = setInverse,
-         getInverse = getInverse)  # put together an inventory of functions
+  InverseMatrix <- NULL  # initialization
+  set <- function(y) { 
+    x <<- y  # assign new matrix as input
+    InverseMatrix <<- NULL  # initialize memeory
+  }
+  get <- function() x  ## get the new matrix
+  setInverse <- function(im) InverseMatrix <<- im  # put into memory
+  getInverse <- function() InverseMatrix  # read memory
+  list(set = set, get = get,
+       setInverse = setInverse,
+       getInverse = getInverse)  # put together an inventory of functions
 }
 
 
@@ -38,15 +38,15 @@ makeCacheMatrix <- function(x = matrix()) {
 # in the cache via the setInverse function.
 
 cacheSolve <- function(x) {
-    # Return a matrix that is the inverse of 'x'
-    InverseMatrix <- x$getInverse()  # read the result in memory
-    if(!is.null(InverseMatrix)) {  # when the result in memeory is not null
-      message("getting cached data")  # indicate there is no change
-      return(InverseMatrix)  # return the result in memory
-    }
-    # when the result in memory is null, calculate the new inverse matrix
-    newmatrix <- x$get()  # read in the new matrix
-    InverseMatrix <- solve(newmatrix) # solve for the inverse matrix
-    x$setInverse(InverseMatrix)  # put new result into memory
-    Inversedatrix  # return this new result
+  # Return a matrix that is the inverse of 'x'
+  InverseMatrix <- x$getInverse()  # read the result in memory
+  if(!is.null(InverseMatrix)) {  # when the result in memeory is not null
+    message("getting cached data")  # indicate there is no change
+    return(InverseMatrix)  # return the result in memory
+  }
+  # when the result in memory is null, calculate the new inverse matrix
+  newmatrix <- x$get()  # read in the new matrix
+  InverseMatrix <- solve(newmatrix) # solve for the inverse matrix
+  x$setInverse(InverseMatrix)  # put new result into memory
+  InverseMatrix  # return this new result
 }
